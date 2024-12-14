@@ -1,0 +1,34 @@
+﻿{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Add a New Avion</h1>
+    <form method="POST" action="{{ url_for('add_avion') }}">
+        <div class="mb-3">
+            <label for="numav" class="form-label">Avion Number</label>
+            <input type="text" class="form-control" id="numav" name="numav" required>
+        </div>
+        <div class="mb-3">
+            <label for="typav" class="form-label">Avion Type</label>
+            <input type="text" class="form-control" id="typav" name="typav" required>
+        </div>
+        <div class="mb-3">
+            <label for="datms" class="form-label">Date of Manufacture</label>
+            <input type="date" class="form-control" id="datms" name="datms" required>
+        </div>
+        <div class="mb-3">
+            <label for="nbhddrev" class="form-label">Number of Hours Since Last Revision</label>
+            <input type="number" class="form-control" id="nbhddrev" name="nbhddrev" required>
+        </div>
+        <div class="mb-3">
+            <label for="datrev" class="form-label">Date of Last Revision</label>
+            <input type="date" class="form-control" id="datrev" name="datrev" required>
+        </div>
+        <div class="mb-3 form-check">
+            <input type="checkbox" class="form-check-input" id="actif" name="actif">
+            <label class="form-check-label" for="actif">Active</label>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+{% endblock %}

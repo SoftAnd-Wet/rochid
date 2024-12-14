@@ -1,2 +1,12 @@
-﻿<h1>Hello world</h1>
-<p>this is the true {{wordused}}</p>
+﻿{%extends 'base.html'%}
+{%block content%}
+<h1>Avionne</h1>
+<p>The Right Way To {{wordused}}</p>
+<br />
+<br />
+<br />
+<center><img src="{{url_for('static',filename='images/fly4.png')}}"></center>
+<br />
+<br />
+<br />
+{%endblock%}
