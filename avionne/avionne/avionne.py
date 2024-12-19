@@ -46,6 +46,42 @@ def add_avion():
         
 
     return render_template('add_avion.html')
+@app.route('/search', methods=['POST'])
+def search():
+    numav = request.form.get('plane_number', '')
+    typav = request.form.get('plane_type', '')
+    actif = request.form.get('plane_status', '')
+    start_date = request.form.get('start_date', '')
+    end_date = request.form.get('end_date', '')
+
+    query = "SELECT * FROM Avions WHERE 1=1"
+    params = []
+
+    if numav:
+        query += " AND NUMAV = ?"
+        params.append(numav)
+    if typav:
+        query += " AND TYPAV = ?"
+        params.append(typav)
+    if actif:
+        query += " AND actif = ?"
+        params.append(actif)
+    if start_date:
+        query += " AND DATMS >= ?"
+        params.append(start_date)
+    if end_date:
+        query += " AND DATMS <= ?"
+        params.append(end_date)
+
+    # Connect to the database and execute the query
+    conn = sqlite3.connect('gestion_avions.db')
+    cursor = conn.cursor()
+    cursor.execute(query, params)
+    planes = cursor.fetchall()
+    conn.close()
+
+    # Render the filtered results in the template
+    return render_template('show_plane.html', planes=planes)
 @app.route('/perform_action', methods=['POST'])
 def perform_action():
      plane_id = request.json.get('planeId')
